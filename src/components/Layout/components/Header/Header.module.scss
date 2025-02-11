@@ -95,11 +95,36 @@
     }
 }
 
+// Action
+.action {
+    display: flex;
+    align-items: center;
+}
+
+// user avatar
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
 // more-btn
 .more-btn {
     font-size: 2rem;
     margin-left: 28px;
     padding: 4px 8px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+//action-btn
+.action-btn {
+    font-size: 2.2rem;
+    padding: 4px 12px;
+    color: #161823;
     background-color: transparent;
     cursor: pointer;
 }
