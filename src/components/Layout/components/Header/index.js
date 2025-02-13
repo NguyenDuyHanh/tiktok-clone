@@ -1,19 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faSpinner,
-    faCircleXmark,
-    faMagnifyingGlass,
-    faEllipsisVertical,
-    faEarthAsia,
-    faCircleQuestion,
-    faKeyboard,
-    faCloudArrowUp,
-    faGear,
-    faCoins,
-    faArrowRightFromBracket,
-} from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faCircleXmark, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
@@ -23,14 +11,26 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import AccountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
+import {
+    CoinIcon,
+    HelpIcon,
+    InboxIcon,
+    LanguageIcon,
+    LogoutIcon,
+    MessageIcon,
+    ProfileIcon,
+    SearchIcon,
+    SettingsIcon,
+    ShortcutsIcon,
+    UploadIcon,
+} from '~/components/icons';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
     {
-        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        icon: <LanguageIcon />,
         title: 'English',
         children: {
             title: 'Language',
@@ -49,12 +49,12 @@ const MENU_ITEMS = [
         },
     },
     {
-        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        icon: <HelpIcon />,
         title: 'Feedback and help',
         to: '/feedback',
     },
     {
-        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        icon: <ShortcutsIcon />,
         title: 'Keyboard shortcuts',
         to: '/keyboard',
     },
@@ -81,23 +81,23 @@ function Header() {
 
     const user_menu = [
         {
-            icon: <FontAwesomeIcon icon={faUser} />,
+            icon: <ProfileIcon />,
             title: 'View profile',
             to: '/@hoaa',
         },
         {
-            icon: <FontAwesomeIcon icon={faCoins} />,
+            icon: <CoinIcon />,
             title: 'Get coins',
             to: '/coin',
         },
         {
-            icon: <FontAwesomeIcon icon={faGear} />,
+            icon: <SettingsIcon />,
             title: 'Setting',
             to: '/setting',
         },
         ...MENU_ITEMS,
         {
-            icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+            icon: <LogoutIcon />,
             title: 'Log out',
             to: '/',
             separate: true,
@@ -132,7 +132,7 @@ function Header() {
                         <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
 
                         <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </Tippy>
@@ -141,12 +141,17 @@ function Header() {
                         <>
                             <Tippy content="Upload video" placement="bottom" delay={[0, 200]}>
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudArrowUp} />
+                                    <UploadIcon />
                                 </button>
                             </Tippy>
                             <Tippy content="Message" placement="bottom" delay={[0, 200]}>
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faEnvelope} />
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy content="Inbox" placement="bottom" delay={[0, 200]}>
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon />
                                 </button>
                             </Tippy>
                         </>
@@ -158,9 +163,9 @@ function Header() {
                     )}
                     <Menu items={currentUser ? user_menu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
-                                src="https://p16-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/45cdacbd2595b03bfe09605f32520a2b.jpeg?lk3s=a5d48078&nonce=11543&refresh_token=c1d5ed8278bfd5d52cfd898f31007424&x-expires=1739412000&x-signature=Kzx0iQEq1OMlNcJvnRHaI7v6YgE%3D&shp=a5d48078&shcp=81f88b70"
+                            <Image
                                 className={cx('user-avatar')}
+                                src="https://p16-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/45cdacbd2595b03bfe09605f32520a2b.jpeg?lk3s=a5d48078&nonce=11543&refresh_token=c1d5ed8278bfd5d52cfd898f31007424&x-expires=1739412000&x-signature=Kzx0iQEq1OMlNcJvnRHaI7v6YgE%3D&shp=a5d48078&shcp=81f88b70"
                                 alt="Nguyen Van A"
                             />
                         ) : (
