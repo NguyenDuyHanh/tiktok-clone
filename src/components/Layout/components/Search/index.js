@@ -5,6 +5,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import { SearchIcon } from '~/components/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import * as searchServices from '~/apiServices/searchSevices';
 import styles from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
@@ -24,17 +25,17 @@ function Search() {
             setSearchResults([]);
             return;
         }
-        setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResults(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+        const fetchAPI = async () => {
+            setLoading(true);
+
+            const result = await searchServices.search(debounce);
+            setSearchResults(result);
+
+            setLoading(false);
+        };
+
+        fetchAPI();
     }, [debounce]);
 
     const inputRef = useRef();
